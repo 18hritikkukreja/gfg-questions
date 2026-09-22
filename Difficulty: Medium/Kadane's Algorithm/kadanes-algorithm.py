@@ -1,14 +1,13 @@
 class Solution:
-    import sys
     def maxSubarraySum(self, arr):
         # Code here
-        sum =0; 
-        maxi = -sys.maxsize - 1
-        
-        for x in arr:
-            sum += x
-            maxi =  max(sum,maxi)
-            if sum < 0 :
-                sum = 0
-        
-        return maxi        
+        def solve(i,curr,arr):
+            n = len(arr)
+            if i == n:
+                return curr
+            
+            curr = max(arr[i],curr + arr[i])
+            
+            return max(curr,solve(i+1,curr,arr))
+            
+        return solve(0,0,arr)     
